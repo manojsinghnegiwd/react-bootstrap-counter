@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-counter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A counter input component for react using bootstrap",
   "main": "index.js",
   "scripts": {
