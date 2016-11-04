@@ -54,6 +54,23 @@ export default class CounterInput extends React.Component {
 		}
 	}
 
+	_decrease = (value) => {
+		if( value === '' ) {
+			this.set(this.state.min) // fallback to min value
+		} else {
+			let parsed = parseInt(value, 10);
+
+			// if parsed is not a number
+			if (isNaN(parsed)) {
+				this.set(this.state.min) // fallback to min value
+			} else {
+				if(value > this.state.min) {
+					this.set(parsed - 1) // increment value
+				}
+			}
+		}
+	}
+
 	render () {
 
 		const { value } = this.state;

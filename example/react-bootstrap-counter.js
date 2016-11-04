@@ -67,6 +67,23 @@ var CounterInput = function (_React$Component) {
 			}
 		};
 
+		_this._decrease = function (value) {
+			if (value === '') {
+				_this.set(_this.state.min); // fallback to min value
+			} else {
+				var parsed = parseInt(value, 10);
+
+				// if parsed is not a number
+				if (isNaN(parsed)) {
+					_this.set(_this.state.min); // fallback to min value
+				} else {
+					if (value > _this.state.min) {
+						_this.set(parsed - 1); // increment value
+					}
+				}
+			}
+		};
+
 		_this.state = {
 			value: _this.props.value || '',
 			min: _this.props.min || 0,
