@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "./node_modules/.bin/webpack src/index.jsx"
+  },
+  "dependencies": {
+    "react-dom": "^15.3.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
+  }
+}

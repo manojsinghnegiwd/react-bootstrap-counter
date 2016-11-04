@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "./node_modules/.bin/babel src/react-bootstrap-counter.jsx -o index.js",
+    "dev": "./node_modules/.bin/babel src/react-bootstrap-counter.jsx  -o example/react-bootstrap-counter.js",
     "prepublish": "npm run build"
   },
   "repository": {
