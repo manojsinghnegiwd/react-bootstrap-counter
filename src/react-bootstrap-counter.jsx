@@ -39,17 +39,32 @@ export default class CounterInput extends React.Component {
 		}
 	}
 
+	_increase = (value) => {
+		if( value === '' ) {
+			this.set(this.state.min) // fallback to min value
+		} else {
+			let parsed = parseInt(value, 10);
+
+			// if parsed is not a number
+			if (isNaN(parsed)) {
+				this.set(this.state.min) // fallback to min value
+			} else {
+				this.set(parsed + 1) // increment value
+			}
+		}
+	}
+
 	render () {
 
 		const { value } = this.state;
 
 		return (
 			<div className="input-group counter-input">
-				<span className="input-group-addon" onClick={() => {this._increaseValue(value)}}>
+				<span className="input-group-addon" onClick={() => {this._increase(value)}}>
 					<i className="fa fa-plus" />
 				</span>
 				<input className="form-control" type="text" onChange={this._onChange} value={value} />
-				<span className="input-group-addon" onClick={() => {this._decreaseValue(value)}}>
+				<span className="input-group-addon" onClick={() => {this._decrease(value)}}>
 					<i className="fa fa-minus"/>
 				</span>
 			</div>

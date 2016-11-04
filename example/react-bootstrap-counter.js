@@ -52,6 +52,21 @@ var CounterInput = function (_React$Component) {
 			}
 		};
 
+		_this._increase = function (value) {
+			if (value === '') {
+				_this.set(_this.state.min); // fallback to min value
+			} else {
+				var parsed = parseInt(value, 10);
+
+				// if parsed is not a number
+				if (isNaN(parsed)) {
+					_this.set(_this.state.min); // fallback to min value
+				} else {
+					_this.set(parsed + 1); // increment value
+				}
+			}
+		};
+
 		_this.state = {
 			value: _this.props.value || '',
 			min: _this.props.min || 0,
@@ -75,7 +90,7 @@ var CounterInput = function (_React$Component) {
 				_react2.default.createElement(
 					'span',
 					{ className: 'input-group-addon', onClick: function onClick() {
-							_this2._increaseValue(value);
+							_this2._increase(value);
 						} },
 					_react2.default.createElement('i', { className: 'fa fa-plus' })
 				),
@@ -83,7 +98,7 @@ var CounterInput = function (_React$Component) {
 				_react2.default.createElement(
 					'span',
 					{ className: 'input-group-addon', onClick: function onClick() {
-							_this2._decreaseValue(value);
+							_this2._decrease(value);
 						} },
 					_react2.default.createElement('i', { className: 'fa fa-minus' })
 				)
