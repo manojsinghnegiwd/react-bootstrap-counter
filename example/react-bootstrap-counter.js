@@ -37,8 +37,10 @@ var CounterInput = function (_React$Component) {
 			var new_value = e.target.value;
 
 			// check for empty string or invalid values
-			if (new_value === '' || new_value < _this.state.min) {
+			if (new_value === '') {
 				_this.set(_this.state.min); // fallback to min value
+			} else if (new_value > _this.state.max || new_value < _this.state.min) {
+				return; // don't update the value
 			} else if (typeof new_value != 'number') {
 				var parsed = parseInt(new_value, 10); // try to parse the number
 
@@ -62,7 +64,9 @@ var CounterInput = function (_React$Component) {
 				if (isNaN(parsed)) {
 					_this.set(_this.state.min); // fallback to min value
 				} else {
-					_this.set(parsed + 1); // increment value
+					if (value < _this.state.max) {
+						_this.set(parsed + 1); // increment value
+					}
 				}
 			}
 		};
@@ -85,7 +89,7 @@ var CounterInput = function (_React$Component) {
 		};
 
 		_this.state = {
-			value: _this.props.value || '',
+			value: _this.props.value < _this.props.min ? _this.props.min : _this.props.value || 0,
 			min: _this.props.min || 0,
 			max: _this.props.max || -1
 		};

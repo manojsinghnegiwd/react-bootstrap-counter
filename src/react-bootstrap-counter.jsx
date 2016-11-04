@@ -6,7 +6,7 @@ export default class CounterInput extends React.Component {
 		super(props);
 		
 		this.state = {
-			value: this.props.value || '',
+			value: (this.props.value < this.props.min) ? this.props.min : (this.props.value || 0),
 			min: this.props.min || 0,
 			max: this.props.max || -1
 		}
@@ -24,8 +24,10 @@ export default class CounterInput extends React.Component {
 		let new_value = e.target.value;
 
 		// check for empty string or invalid values
-		if( new_value === '' || new_value < this.state.min ) {
+		if( new_value === '' ) {
 			this.set(this.state.min) // fallback to min value
+		} else if ( new_value > this.state.max || new_value < this.state.min) {
+			return ; // don't update the value
 		} else if (typeof new_value != 'number') {
 			var parsed = parseInt(new_value, 10); // try to parse the number
 
@@ -49,7 +51,9 @@ export default class CounterInput extends React.Component {
 			if (isNaN(parsed)) {
 				this.set(this.state.min) // fallback to min value
 			} else {
-				this.set(parsed + 1) // increment value
+				if(value < this.state.max) {
+					this.set(parsed + 1) // increment value
+				}
 			}
 		}
 	}
